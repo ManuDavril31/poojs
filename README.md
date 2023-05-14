@@ -32,3 +32,5 @@ En este caso, se crea un objeto "Perro" llamado "miPerro" con el nombre "Fido", 
 miPerro.correr(); // Output: Fido está corriendo `
 
 https://github.com/alura-es-cursos/1772-javaScript-introduccion-a-la-orientacion-a-objetos/tree/Aula2
+
+https://github.com/alura-es-cursos/1772-javaScript-introduccion-a-la-orientacion-a-objetos/tree/Aula4

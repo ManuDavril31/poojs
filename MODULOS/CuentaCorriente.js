@@ -1,6 +1,8 @@
+import { Cliente } from "./Cliente.js";
+
 export class CuentaCorriente {
   //PROPIEDADES DE LA CLASE
-  cliente;
+  #cliente;
   numeroCuenta;
   #saldoCuenta; //con el numeral # indicamos que la propiedad va a ser privada
 
@@ -9,6 +11,19 @@ export class CuentaCorriente {
     this.cliente = null; //Se pone como null, por que este tipo de dato no va a ser de tipo primitivo [string, number, boolean, etc] en este caso va a ser un dato de tipo Cliente.
     this.numeroCuenta = "";
     this.#saldoCuenta = 0;
+  }
+
+  // SET
+
+  set cliente(valor) {
+    // Si el valor que estoy recibiendo es una instancia de la clase Cliente atribuye el contenido de la propiedad this.#cliente al valor que estor recibiendo
+    if (valor instanceof Cliente) this.#cliente = valor;
+  }
+
+  // GET
+
+  get cliente() {
+    return this.#cliente;
   }
 
   //METODOS DE LA CLASE
