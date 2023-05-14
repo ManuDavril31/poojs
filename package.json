@@ -1,0 +1,10 @@
+{
+  "name": "cuentasbancopopular",
+  "version": "1.0.0",
+  "description": "Gestion cuentas corrientes banco pupular",
+  "main": "index.js",
+  "repository": "https://github.com/ManuDavril31/poojs.git",
+  "author": "manudavril",
+  "license": "MIT",
+  "type": "module"
+}
