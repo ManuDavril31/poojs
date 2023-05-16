@@ -1,3 +1,5 @@
+import { Cliente } from "./Cliente.js";
+
 export class Cuenta {
   // PROPIEDADES PRIVADAS DECLARAMOS ARRIBA DE CONSTRUCTOR
 
@@ -6,26 +8,26 @@ export class Cuenta {
 
   // CONSTRUCTO CON PARAMETROS
 
-  constructor(tipo, cliente, numero, agencia, saldo) {
+  constructor(cliente, numero, agencia, saldo) {
     // PROPIEDADES E INICIALIZANDOLAS CUANDO SE CREA UNA INSTANCIAS DE LA CLASE EN EL CONSTRUCTOR
-    this.tipo = tipo;
     this.numero = numero;
     this.agencia = agencia;
     this.#cliente = cliente;
     this.#saldo = saldo;
   }
 
+  set cliente(valor) {
+    if (valor instanceof Cliente) this.#cliente = valor;
+  }
+
+  get cliente() {
+    return this.#cliente;
+  }
+
   // METODOS DE LA CLASE
 
   depositoEnCuenta(valor) {
     if (valor > 0) this.#saldo += valor;
-    return this.#saldo;
-  }
-
-  retirarDeCuenta(valor) {
-    if (this.tipo === "Corriente") valor = valor * 1.05;
-    if (this.tipo === "Ahorro") valor = valor * 1.02;
-    if (valor <= this.#saldo) this.#saldo -= valor;
     return this.#saldo;
   }
 
@@ -38,5 +40,21 @@ export class Cuenta {
     cuentaDestino.depositoEnCuenta(valor);
     valor = 200;
     valor = valor * 1000;
+  }
+
+  prueba() {
+    console.log("Método padre");
+  }
+
+  retirarDeCuenta(valor) {
+    _retirarDeCuenta(valor, 0);
+  }
+
+  // Métodos privados: le ponermos una barra baja _ para identificar que sea un método privado
+
+  _retirarDeCuenta(valor, comision) {
+    valor = valor * (1 + comision / 100);
+    if (valor <= this.#saldo) this.#saldo -= valor;
+    return this.#saldo;
   }
 }

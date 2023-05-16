@@ -1,39 +1,21 @@
-export class CuentaAhorro {
-  // PROPIEDADES PRIVADAS
+import { Cuenta } from "./Cuenta.js";
 
-  #cliente = null;
-  #saldo;
-
-  // CONSTRUCTO CON PARAMETROS
-
+export class CuentaAhorro extends Cuenta {
   constructor(cliente, numero, agencia, saldo) {
-    // PROPIEDADES E INICIALIZANDOLAS CUANDO SE CREA UNA INSTANCIAS DE LA CLASE EN EL CONSTRUCTOR
-    this.numero = numero;
-    this.agencia = agencia;
-    this.#cliente = cliente;
-    this.#saldo = saldo;
+    super(cliente, numero, agencia, saldo);
   }
 
-  // METODOS DE LA CLASE
-
-  depositoEnCuenta(valor) {
-    if (valor > 0) this.#saldo += valor;
-    return this.#saldo;
-  }
-
+  // Sobreescribe el método retirarDeCuenta de la clase padre
   retirarDeCuenta(valor) {
+    // valor = valor * 1.02;
+    // No se puede acceder a la propiiedad '#saldo' fuera de la clase padre Cuenta porque tiene un identificador privado
+    /* 
+    NO PUEDO HACER ESTO
     if (valor <= this.#saldo) this.#saldo -= valor;
-    return this.#saldo;
-  }
+     return this.#saldo;     
+    */
+    // Simplemente modifico el valor de la variable valor y llamo al super.retirarDeCuenta(valor) y le paso ya el valor modificado.
 
-  verSaldo() {
-    return this.#saldo;
-  }
-
-  transferirParaCuenta(valor, cuentaDestino) {
-    this.retirarDeCuenta(valor);
-    cuentaDestino.depositoEnCuenta(valor);
-    valor = 200;
-    valor = valor * 1000;
+    super._retirarDeCuenta(valor, 2);
   }
 }

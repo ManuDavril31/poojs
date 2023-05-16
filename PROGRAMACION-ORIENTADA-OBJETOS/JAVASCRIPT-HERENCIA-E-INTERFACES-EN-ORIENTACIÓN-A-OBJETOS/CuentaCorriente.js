@@ -1,50 +1,34 @@
-import { Cliente } from "./Cliente.js";
+import { Cuenta } from "./Cuenta.js";
 
-export class CuentaCorriente
-{
-    #cliente;
-    numero;
-    agencia;
-    #saldo;
-    static cantidadCuentas = 0;
+export class CuentaCorriente extends Cuenta {
+  static cantidadCuentas = 0;
 
-    set cliente(valor) {
-        if (valor instanceof Cliente)
-            this.#cliente = valor;
-    }
+  constructor(cliente, numero, agencia) {
+    super(cliente, numero, agencia, 0); // cero es el valor de saldo, no se lo pasamos por parametro porque siempre lo iniciaremos en cero
+    CuentaCorriente.cantidadCuentas++;
+  }
+  // Aqui llame al método padre desde el hijo
+  prueba() {
+    super.prueba();
+  }
 
-    get cliente() {
-        return this.#cliente;
-    }
+  //Aqui sobre escribi el método prueba del padre en el hijo
+  prueba() {
+    console.log("Método hijo");
+  }
 
-    constructor(cliente, numero, agencia) {
-        this.cliente = cliente;
-        this.numero = numero;
-        this.agencia = agencia;
-        this.#saldo = 0;
-        CuentaCorriente.cantidadCuentas++;
-    }
+  // Sobreescribe el método retirarDeCuenta de la clase padre
+  retirarDeCuenta(valor) {
+    // valor = valor * 1.05;
 
-    depositoEnCuenta(valor) {
-        if (valor > 0)
-            this.#saldo += valor;
-        return this.#saldo;
-    }
+    // No se puede acceder a la propiiedad '#saldo' fuera de la clase padre Cuenta porque tiene un identificador privado
+    /* 
+    NO PUEDO HACER ESTO
+    if (valor <= this.#saldo) this.#saldo -= valor;
+     return this.#saldo;     
+    */
+    // Simplemente modifico el valor de la variable valor y llamo al super.retirarDeCuenta(valor) y le paso ya el valor modificado.
 
-    retirarDeCuenta(valor) {
-        if (valor <= this.#saldo)
-            this.#saldo -= valor;
-        return this.#saldo;
-    }
-
-    verSaldo() {
-        return this.#saldo;
-    }
-
-    transferirParaCuenta(valor,cuentaDestino) {
-        this.retirarDeCuenta(valor);
-        cuentaDestino.depositoEnCuenta(valor);
-        valor = 200;
-        valor = valor*1000;
-    }
+    super._retirarDeCuenta(valor, 5);
+  }
 }
