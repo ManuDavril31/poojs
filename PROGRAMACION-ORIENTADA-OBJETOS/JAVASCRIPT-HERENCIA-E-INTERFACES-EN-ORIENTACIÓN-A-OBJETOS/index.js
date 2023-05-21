@@ -1,9 +1,15 @@
 /*Importación de clases*/
 import { Cliente } from "./Cliente.js";
-import { CuentaAhorro } from "./CuentaAhorro.js";
-import { CuentaCorriente } from "./CuentaCorriente.js";
+import { CuentaAhorro } from "./Cuentas/CuentaAhorro.js";
+import { CuentaCorriente } from "./Cuentas/CuentaCorriente.js";
+import { Empleado } from "./Empleados/Empleado.js";
+import { Director } from "./Empleados/Director.js";
+import { Gerente } from "./Empleados/Gerente.js";
+import { SistemaAutenticacion } from "./SistemaAutenticacion.js";
 
 const cliente1 = new Cliente("Manuel", "13804050", "123224");
+cliente1.asignarClave = "123";
+console.log("--->", SistemaAutenticacion.login(cliente1, "123"));
 const cliente2 = new Cliente("Nevis", "16979808", "8989");
 
 const cuentaDeManuel = new CuentaCorriente(cliente1, "1", "001");
@@ -26,3 +32,26 @@ console.log(cuentaAhorroManuel.verSaldo());
 //
 
 cuentaDeManuel.prueba();
+
+//
+
+console.log("//////////////////////////////////////");
+
+const empleado = new Empleado("Manuel Martinez", "1", 1000);
+empleado.asignarClave = "123";
+const director = new Director("Victoria Marinez", "3", 2000);
+const gerente = new Gerente("Nevis Polo", "2", 3000);
+
+console.log(
+  empleado.verBonificacion(),
+  "\n",
+  gerente.verBonificacion(),
+  "\n",
+  director.verBonificacion()
+);
+
+console.log("-------------------------------- \n");
+
+// CLAVE
+
+console.log(SistemaAutenticacion.login(empleado, "123"));
